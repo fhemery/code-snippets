@@ -1,0 +1,71 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package tournament.presentation {
+    class TournamentController {
+        post(tournament: TournamentDto): String
+        get(id: String): TournamentDto
+    }
+
+    class ParticipantController {
+        post(tournamentId: String, participant: ParticipantDto): String
+        delete(id: String)
+    }
+}
+
+package tournament.application {
+    interface ITournamentUsecase
+    class TournamentUsecase {
+        createTournament(tournament: Tournament): String
+        getTournament(tournament: Tournament): String
+    }
+    ITournamentUsecase <|-- TournamentUsecase
+
+    interface IParticipantUsecase
+    class ParticipantUsecase {
+        addParticipantToTournament(tournamentId: String, participant: Participant)
+    }
+    IParticipantUsecase <|-- ParticipantUsecase
+
+    package "tournament.application.model" {
+        class Tournament {
+            name: String
+            participants: List<Participant>
+        }
+
+        class Participant {
+            id: String
+            name: String
+        }
+    }
+}
+
+package tournament.persistence {
+    interface ITournamentRepository
+    class TournamentRepository {
+        insert(tournament: TournamentDao): string
+        update(tournament: TournamentDao)
+        get(id: string): TournamentDao
+        delete(id: string)
+    }
+    ITournamentRepository <|-- TournamentRepository
+
+    interface IParticipantRepository
+    class ParticipantRepository {
+        insert(participant: ParticipantDao): string
+    }
+    IParticipantRepository <|-- ParticipantRepository
+}
+
+TournamentController --> ITournamentUsecase
+ParticipantController --> IParticipantUsecase
+ParticipantUsecase -up-> ITournamentUsecase
+ParticipantUsecase --> Participant
+TournamentUsecase -right-> Tournament
+ParticipantUsecase -down-> IParticipantRepository
+TournamentUsecase -down-> ITournamentRepository
+Tournament *-right- Participant
+
+
+
+@enduml
