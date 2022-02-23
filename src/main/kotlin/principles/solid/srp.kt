@@ -1,4 +1,4 @@
-package principles.srp
+package principles.solid
 
 class BooksManager {
 
@@ -21,9 +21,3 @@ class BooksManager {
 }
 
 data class Book(val id: String, val title: String)
-
-class ChessBoard() {
-    var allPieces: List<Any> = emptyList()
-
-    fun addPiece(pieceType: String, row: String, column: String) {}
-}
