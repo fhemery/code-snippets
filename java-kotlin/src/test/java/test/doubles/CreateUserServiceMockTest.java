@@ -1,26 +1,21 @@
 package test.doubles;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.STRICT_STUBS)
 public class CreateUserServiceMockTest {
-    @Mock()
+    @Mock
     IUserRepository userRepository;
-
-    @BeforeEach
-    void setUp () {
-        Mockito.mockitoSession()
-                .initMocks(this)
-                .strictness(Strictness.STRICT_STUBS)
-                .startMocking();
-    }
 
     @Test
     void should_checkIdIsReturnedIsCalled() {
@@ -33,7 +28,7 @@ public class CreateUserServiceMockTest {
 
         // ASSERT
         assertEquals("123", result);
-        Mockito.verify(userRepository);
+        verify(userRepository).insert("John Doe", "john@doe.fr");
     }
 
     @Test

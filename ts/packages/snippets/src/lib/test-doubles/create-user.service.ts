@@ -1,5 +1,3 @@
-import {v4 as uuidV4} from 'uuid';
-
 export class User {
     constructor(readonly id: string, readonly name: string, readonly email: any) {
     }
@@ -10,26 +8,16 @@ export interface IUserRepository {
     get(id: string): User | null;
 }
 
-export class UserRepository implements IUserRepository {
-    constructor (private db: any){}
-
-    insert(name: string, email: string): string {
-        const id = uuidV4();
-        this.db.insert(new User(id, name, email));
-        return id;
-    }
-
-    get(id: string): User | null {
-      return this.db.get(id);
-    }
-}
-
 export class UserValidationService {
-    sendActivationLinkToUser(id: string): void {}
+    sendActivationLinkToUser(id: string): void {
+      // Do something potentially complex
+    }
 }
 
 export class NotificationService {
-    sendNotification(to: string, message: string): void {}
+    sendNotification(to: string, message: string): void {
+      // Do something we don't care for now
+    }
 }
 
 export class CreateUserService {

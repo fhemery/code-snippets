@@ -9,7 +9,6 @@ class StubUserRepository implements IUserRepository {
     public String insert(String name, String email) {
         return "123";
     }
-
     @Override
     public User get(String id) {
         return null;
@@ -17,7 +16,6 @@ class StubUserRepository implements IUserRepository {
 }
 
 public class CreateUserServiceStubTest {
-
     @Test
     void should_returnTheIdSentByTheRepository() {
         var service = new CreateUserService(new StubUserRepository(), new UserValidationService(), null);

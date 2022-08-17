@@ -16,7 +16,7 @@ dependencies {
     implementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
     implementation("org.junit.jupiter:junit-jupiter-engine:5.9.0")
     testImplementation("org.mockito:mockito-core:4.6.1")
-    testImplementation("org.mockito:mockito-inline:4.6.1")
+    testImplementation("org.mockito:mockito-junit-jupiter:4.6.1")
     testImplementation(kotlin("test"))
 }
 

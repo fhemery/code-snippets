@@ -6,19 +6,6 @@ import {
   UserValidationService
 } from "./create-user.service";
 
-class FakeUserRepository implements IUserRepository {
-  private users = new Map<string, User>();
-
-  get(id: string): User | null {
-    return this.users.get(id) || null;
-  }
-
-  insert(name: string, email: string): string {
-    const id = (this.users.size + 1).toString();
-    this.users.set(id, new User(id, name, email));
-    return id;
-  }
-}
 
 describe('createUserService', () => {
 
@@ -71,6 +58,20 @@ describe('createUserService', () => {
       expect(spy).toHaveBeenCalledWith(id);
     });
   });
+
+  class FakeUserRepository implements IUserRepository {
+    private users = new Map<string, User>();
+
+    get(id: string): User | null {
+      return this.users.get(id) || null;
+    }
+
+    insert(name: string, email: string): string {
+      const id = (this.users.size + 1).toString();
+      this.users.set(id, new User(id, name, email));
+      return id;
+    }
+  }
 
   describe('when using a fake', function () {
     it('should return the id send by the repository', () => {
