@@ -39,8 +39,6 @@ class GildedRoseTests {
         assertEquals(items[0].sellIn,5)
     }
 
-
-
     @Test
     fun `regularCase_qualityDecaysAfterEachDay`() {
         val items = arrayOf<Item>(Item("foo", 5, 10))
@@ -154,8 +152,6 @@ class GildedRoseTests {
         app.updateQuality()
         assertTrue { items[0].quality == 0 }
     }
-
-
 }
 
 
